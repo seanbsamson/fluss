@@ -6,18 +6,17 @@ sidebar_position: 1
 
 # Overview
 
-Below, we provide an overview of the key components of a Fluss cluster, detailing their functionalities and implementations. Additionally, we will introduce the various deployment methods available for Fluss.
+Below, we provide an overview of the key components of a Fluss cluster, outlining their core functionalities and implementations. We also introduce the different deployment methods available for Fluss.
 
 ## Overview and Reference Architecture
 
-The figure below shows the building blocks of Fluss clusters:
+The figure below shows the building blocks of a Fluss cluster:
 
 <img width="1200px" src={require('../assets/deployment_overview.png').default} />
 
 
 
-When deploying Fluss, there are often multiple options available for each building block.
-We have listed them in the table below the figure.
+When deploying Fluss, multiple options are available for each building block. These options are listed in the table below the figure.
 
 
 <table class="table table-bordered">
@@ -33,12 +32,11 @@ We have listed them in the table below the figure.
             <td>Fluss Client</td>
             <td>
                 <p>
-                    The Fluss Client is the entry point for users to interact with Fluss Cluster. It is responsible for 
-                    managing Fluss Cluster like:
+                    The Fluss Client is the primary entry point for users to interact with a Fluss Cluster. It is responsible for managing and operating the cluster through functions such as:
                 </p>
                 <ul>
-                    <li> Admin operation: like create or delete database/table etc</li>
-                    <li>Table operation: like write, read, delete data</li>
+                    <li> Administrative operations: creating or deleting databases, tables, and related resources.</li>
+                    <li>Table operations: writing, reading, and deleting data</li>
                 </ul>
             </td>
             <td>
@@ -51,13 +49,12 @@ We have listed them in the table below the figure.
             <td>CoordinatorServer</td>
             <td>
                 <p>
-                CoordinatorServer is the name of the central work coordination component of Fluss. 
-                The coordinator server is responsible for:
+                The CoordinatorServer is the central work-coordination component of Fluss. It is responsible for:
                 </p>
                 <ul>
-                    <li>Manage the TabletServer</li>
-                    <li>Manage the metadata</li>
-                    <li>Coordinate the whole cluster, e.g. data re-balance, recover data when tablet servers down</li>
+                    <li>Managing TabletServers</li>
+                    <li>Managing cluster metadata</li>
+                    <li>Coordinating the entire cluster, such as performing data rebalancing and recovering data when TabletServers fail.</li>
                 </ul>
             </td>
             <td rowspan="2">
@@ -72,7 +69,7 @@ We have listed them in the table below the figure.
             <td>TabletServer</td>
             <td>
                 <p>
-                TabletServers are the actual node to manage and store data.
+                TabletServers are the nodes responsible for managing and storing data.
                 </p>
             </td>
         </tr>
@@ -85,10 +82,10 @@ We have listed them in the table below the figure.
                 <td>ZooKeeper</td>
                     <td>
                         :::warning
-                        ZooKeeper will be removed to simplify deployment in the near future. For more details, please checkout [Roadmap](/roadmap/).
+                        ZooKeeper will be removed in the near future to simplify deployment. For more details, please check out [Roadmap](/roadmap/).
                         :::
                         <p>
-                        Fluss leverages ZooKeeper for distributed coordination between all running CoordinatorServer instances and for metadata management.
+                        Fluss leverages ZooKeeper for distributed coordination across all running CoordinatorServer instances and for managing cluster metadata.
                         </p>
                     </td>
                     <td>
@@ -100,7 +97,7 @@ We have listed them in the table below the figure.
             <tr>
             <td>Remote Storage (optional)</td>
             <td>
-                Fluss uses file systems as remote storage to store snapshots for Primary-Key Table and store tiered log segments for Log Table.
+                Fluss uses file systems as remote storage to store snapshots for Primary-Key Tables and to store tiered log segments for Log Tables.
             </td>
             <td>
             <li>[HDFS](maintenance/filesystems/hdfs.md)</li>
@@ -111,9 +108,7 @@ We have listed them in the table below the figure.
         <tr>
             <td>Lakehouse Storage (optional)</td>
             <td>
-               Fluss's DataLake Tiering Service will continuously compact Fluss's Arrow files into Parquet/ORC files in open lake format.
-               The data in Lakehouse storage can be read both by Fluss's client in a Union Read manner and accessed directly
-               by query engines such as Flink, Spark, StarRocks, Trino.
+               Fluss’s DataLake Tiering Service continuously compacts Fluss’s Arrow files into Parquet/ORC files in an open lake format. Data stored in the Lakehouse layer can be read by Fluss clients using Union Read, and can also be accessed directly by query engines such as Flink, Spark, StarRocks, and Trino.
             </td>
             <td>
                 <li>[Paimon](streaming-lakehouse/integrate-data-lakes/paimon.md)</li>
@@ -124,7 +119,7 @@ We have listed them in the table below the figure.
         <tr>
             <td>Metrics Storage (optional)</td>
             <td>
-                CoordinatorServer/TabletServer report internal metrics and Fluss client (e.g., connector in Flink jobs) can report additional, client specific metrics as well.
+                CoordinatorServers and TabletServers report internal metrics, and Fluss clients (e.g., connectors in Flink jobs) can also report additional client-specific metrics.
             </td>
             <td>
                <li>[JMX](maintenance/observability/metric-reporters.md#jmx)</li>
